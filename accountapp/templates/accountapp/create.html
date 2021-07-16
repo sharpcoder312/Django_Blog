@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div style="text-align: center; max-width: 30rem; margin: 3rem auto;">
+  <div>
+    <h4 class="logo">
+      회원가입
+    </h4>
+  </div>
+  <form action="{% url 'accountapp:create' %}" method="post">
+    <!-- accountapp에 있는 create로 연결 -->
+    {% csrf_token %}
+    {% bootstrap_form form %} <!--  AccountCreateView class에서 지정해준 기본적인 장고폼 -->
+    <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
+  </form>
+</div>
+{% endblock %}

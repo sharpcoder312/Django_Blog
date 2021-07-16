@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="margin: 15rem; text-align: center;">
+  <h1 class="logo">
+    hi
+  </h1>
+  <div>
+    <form action="/account/hello_world/" method="POST">
+      {% csrf_token %}
+      <div>
+        <input type="text" name="hello_world_input"> <!-- data보내기 - 서버로 보낼 내용 + 데이터를 구분지어 줄 구분자(name) -->
+      </div>
+      <input type="submit" class="btn btn-primary" value="POST">
+    </form>
+  </div>
+
+
+  {% if hello_world_list %}
+    {% for hello_world in hello_world_list %}
+    <h1>
+      {{ hello_world.text }}
+    </h1>
+    {% endfor %}
+  {% endif %}
+
+</div>
+{% endblock %}
