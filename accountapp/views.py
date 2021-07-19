@@ -8,7 +8,7 @@ from django.views.generic import CreateView, DetailView, UpdateView
 from django.views.generic.edit import DeleteView
 
 from accountapp.models import HelloWorld
-from accountapp.forms import AccountUpdateForm
+from accountapp.forms import AccountCustomForm, AccountUpdateForm
 
 # Create your views here.
 
@@ -35,7 +35,7 @@ def hello_world(request):
 
 class AccountCreateView(CreateView):
     model = User    # 무슨 모델? 장고에서 기본으로 제공해주는 모델 - User
-    form_class = UserCreationForm   # 장고에서 기본적으로 제공해주는 Form
+    form_class = AccountCustomForm   # 장고에서 기본적으로 제공해주는 Form
     success_url = reverse_lazy('accountapp:hello_world')
     # reverse_lazy인 이유는 함수와 클래스가 파이썬에서 불러와지는 방식의 차이가 있기때문이다.
     # 계정 만들기에 성공했다면 어느 경로로 재연결 할 것인가?
@@ -52,6 +52,7 @@ class AccountDetailView(DetailView):
 
 class AccountUpdateView(UpdateView):
     model = User
+    context_object_name = 'target_user'
     form_class = AccountUpdateForm
     success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'accountapp/update.html'
@@ -59,5 +60,6 @@ class AccountUpdateView(UpdateView):
 
 class AccountDeleteView(DeleteView):
     model = User
+    context_object_name = 'target_user'
     success_url = reverse_lazy('accountapp:login')
     template_name = 'accountapp/delete.html'

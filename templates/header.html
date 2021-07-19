@@ -12,13 +12,13 @@
     <a href="{% url 'accountapp:login' %}?next={{ request.path }}"> <!--  ?는 get방식 start -->
       <!-- 현재 만든 페이지 어디서든간에 (header? base?) 그 url을 next라는 인자로 넘겨줌으로써 로그인을 하고나서도 원래있는 자리로 되돌아오게된다. -->
       <!-- request.path가 현재 원래있던 경로를 의미하는 것 같음 -->
-      <span>login</span>
+      <span style="margin-right: 5px;">login</span>
     </a>
     <a href="{% url 'accountapp:create' %}">
       <span>SignUp</span>
     </a>
     {% else %}
-    <a href="{% url 'accountapp:detail' pk=user.pk %}">  <!-- 접속한 유저의 primary key를 해당 pk에 대입 -->
+    <a href="{% url 'accountapp:detail' pk=user.pk %}" style="margin-right: 5px;">  <!-- 접속한 유저의 primary key를 해당 pk에 대입 -->
       <span>MyPage</span>
     </a>
     <a href="{% url 'accountapp:logout' %}?next={{ request.path }}">
